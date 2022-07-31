@@ -1,6 +1,6 @@
 # Partitions of the Negative Parts of Vertices of Hypercube Graphs, and Vertex Decompositions w.r.t. Distinguished Symmetric Cycles #
 
-A Haskell nodule exporting five functions that implement enumeration
+A Haskell module exporting five functions that implement enumeration
 mechanisms described in Theorem 6.4 from the 
 monograph [A.O. Matveev, Symmetric Cycles](https://www.jennystanford.com/), 
 Jenny Stanford Publishing, 2023, and illustrated in Example 6.5.
