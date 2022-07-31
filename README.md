@@ -1,4 +1,4 @@
-# Partitions of the Negative Parts of Vertices of Hypercube Graphs, and Vertex Decompositions w.r.t. Distinguished Symmetric Cycles of the Graphs #
+# Partitions of the Negative Parts of Vertices of Hypercube Graphs, and Vertex Decompositions w.r.t. Distinguished Symmetric Cycles #
 
 A Haskell nodule exporting five functions that implement enumeration
 mechanisms described in Theorem 6.4 from the 
