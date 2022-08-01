@@ -5,7 +5,7 @@
 -- Given odd integers l', l'', l, such that 1 <= l', l'', l <= t, and positive integers j' and j'',
 -- consider the following family of ordered pairs (A,B)  of disjoint unordered subsets A and B of
 -- the ground set [t] :={1, 2, ..., t}:
--- { (A,B) <- 2^t X 2^t: |A\cap B|=0,  0 < |A| = j',  0 < |B| = j'',  j'+j''<t,
+-- { (A,B) <- 2^[t] X 2^[t]: |A\cap B|=0,  0 < |A| = j',  0 < |B| = j'',  j'+j''<t,
 --    q(A)=l',  q(B)=l'',  q(A\dot\cup B) = l} .                                              (***)
 
 module PNPVD
