@@ -5,8 +5,8 @@
 -- Given odd integers l', l'', l, such that 1 <= l', l'', l <= t, and positive integers j' and j'',
 -- consider the following family of ordered pairs (A,B)  of disjoint unordered subsets A and B of
 -- the ground set [t] :={1, 2, ..., t}:
--- { (A,B) <- 2^[t] X 2^[t]: |A\cap B|=0,  0 < |A| = j',  0 < |B| = j'',  j'+j''<t,
---    q(A)=l',  q(B)=l'',  q(A\dot\cup B) = l} .                                              (***)
+-- { (A,B) <- 2^[t] X 2^[t]: |A\cap B| = 0,  0 < |A| = j',  0 < |B| = j'',  j'+j'' < t,
+--    q(A) = l',  q(B) = l'',  q(A\dot\cup B) = l } .                                           (*)
 
 module PNPVD
   ( theorem6Dot4I
@@ -20,7 +20,7 @@ import           Math.Combinatorics.Exact.Binomial (choose)
 
 theorem6Dot4I ::
      Integer -> (Integer, Integer) -> (Integer, Integer, Integer) -> Integer
--- Theorem 6.4(i): In the family (***) there are theorem6Dot4I t (j', j'') (l', l'', l) pairs (A,B)
+-- Theorem 6.4(i): In the family (*) there are theorem6Dot4I t (j', j'') (l', l'', l) pairs (A,B)
 -- of sets A and B such that |{1,t} \cap A| = |{1,t} \cap B|=0 .
 -- Call for instance (as in Example 6.5(i) of the monograph)
 --      ghci> theorem6Dot4I 5 (2, 1) (3, 3, 3)
@@ -35,9 +35,9 @@ theorem6Dot4I t (j', j'') (l', l'', l)
   | j' <= 0 || j' > t - 2 = -2 -- "N/A: j' should be between 1 (included) and (t-2) (included)"
   | j'' <= 0 || j'' > t - 2 = -3 -- "N/A: j'' should be between 1 (included) and (t-2) (included)"
   | j' + j'' >= t = -4 -- "N/A: (j' + j'') should be < t"
-  | even l' = -5 -- "N/A: l' should be odd"
-  | even l'' = -6 -- "N/A: l'' should be odd"
-  | even l = -7 -- "N/A: l should be odd"
+  | l' < 1 || even l' = -5 -- "N/A: l' should be positive and odd"
+  | l'' < 1 || even l'' = -6 -- "N/A: l'' should be positive and odd"
+  | l < 1 || even l = -7 -- "N/A: l should be positive and odd"
   | otherwise =
     choose (t - (j' + j'') - 1) ((l - 1) `div` 2) *
     choose (j' - 1) ((l' - 3) `div` 2) *
@@ -51,7 +51,7 @@ theorem6Dot4I t (j', j'') (l', l'', l)
 
 theorem6Dot4II ::
      Integer -> (Integer, Integer) -> (Integer, Integer, Integer) -> Integer
--- Theorem 6.4(ii): In the family (***) there are theorem6Dot4II t (j', j'') (l', l'', l) pairs (A,B)
+-- Theorem 6.4(ii): In the family (*) there are theorem6Dot4II t (j', j'') (l', l'', l) pairs (A,B)
 -- of sets A and B such that {1,t} \cap A = {1,t}, and |{1,t} \cap B| = 0.
 -- Call for instance (as in Example 6.5(ii) of the monograph)
 --      ghci> theorem6Dot4II 5 (2, 2) (3, 5, 3)
@@ -66,9 +66,9 @@ theorem6Dot4II t (j', j'') (l', l'', l)
   | j' <= 0 || j' > t - 2 = -2 -- "N/A: j' should be between 1 (included) and (t-2) (included)"
   | j'' <= 0 || j'' > t - 2 = -3 -- "N/A: j'' should be between 1 (included) and (t-2) (included)"
   | j' + j'' >= t = -4 -- "N/A: (j' + j'') should be < t"
-  | even l' = -5 -- "N/A: l' should be odd"
-  | even l'' = -6 -- "N/A: l'' should be odd"
-  | even l = -7 -- "N/A: l should be odd"
+  | l' < 1 || even l' = -5 -- "N/A: l' should be positive and odd"
+  | l'' < 1 || even l'' = -6 -- "N/A: l'' should be positive and odd"
+  | l < 1 || even l = -7 -- "N/A: l should be positive and odd"
   | otherwise =
     choose (t - (j' + j'') - 1) ((l - 3) `div` 2) *
     choose (j' - 1) ((l' - 1) `div` 2) *
@@ -82,7 +82,7 @@ theorem6Dot4II t (j', j'') (l', l'', l)
 
 theorem6Dot4III ::
      Integer -> (Integer, Integer) -> (Integer, Integer, Integer) -> Integer
--- Theorem 6.4(iii): In the family (***) there are theorem6Dot4III t (j', j'') (l', l'', l) pairs (A,B)
+-- Theorem 6.4(iii): In the family (*) there are theorem6Dot4III t (j', j'') (l', l'', l) pairs (A,B)
 -- of sets A and B such that |{1,t} \cap A| = 0, and {1,t} \cap B = {t}.
 -- Call for instance (as in Example 6.5(iii) of the monograph)
 --      ghci> theorem6Dot4III 5 (1, 3) (3, 3, 1)
@@ -97,9 +97,9 @@ theorem6Dot4III t (j', j'') (l', l'', l)
   | j' <= 0 || j' > t - 2 = -2 -- "N/A: j' should be between 1 (included) and (t-2) (included)"
   | j'' <= 0 || j'' > t - 2 = -3 -- "N/A: j'' should be between 1 (included) and (t-2) (included)"
   | j' + j'' >= t = -4 -- "N/A: (j' + j'') should be < t"
-  | even l' = -5 -- "N/A: l' should be odd"
-  | even l'' = -6 -- "N/A: l'' should be odd"
-  | even l = -7 -- "N/A: l should be odd"
+  | l' < 1 || even l' = -5 -- "N/A: l' should be positive and odd"
+  | l'' < 1 || even l'' = -6 -- "N/A: l'' should be positive and odd"
+  | l < 1 || even l = -7 -- "N/A: l should be positive and odd"
   | otherwise =
     choose (t - (j' + j'') - 1) ((l - 1) `div` 2) *
     choose (j' - 1) ((l' - 3) `div` 2) *
@@ -116,7 +116,7 @@ theorem6Dot4III t (j', j'') (l', l'', l)
 
 theorem6Dot4IV ::
      Integer -> (Integer, Integer) -> (Integer, Integer, Integer) -> Integer
--- Theorem 6.4(iv): In the family (***) there are theorem6Dot4IV t (j', j'') (l', l'', l) pairs (A,B)
+-- Theorem 6.4(iv): In the family (*) there are theorem6Dot4IV t (j', j'') (l', l'', l) pairs (A,B)
 -- of sets A and B such that {1,t} \cap A = {1}, and |{1,t} \cap B| = 0.
 -- Call for instance (as in Example 6.5(iv) of the monograph)
 --      ghci> theorem6Dot4IV 5 (2, 1) (3, 3, 3)
@@ -131,9 +131,9 @@ theorem6Dot4IV t (j', j'') (l', l'', l)
   | j' <= 0 || j' > t - 2 = -2 -- "N/A: j' should be between 1 (included) and (t-2) (included)"
   | j'' <= 0 || j'' > t - 2 = -3 -- "N/A: j'' should be between 1 (included) and (t-2) (included)"
   | j' + j'' >= t = -4 -- "N/A: (j' + j'') should be < t"
-  | even l' = -5 -- "N/A: l' should be odd"
-  | even l'' = -6 -- "N/A: l'' should be odd"
-  | even l = -7 -- "N/A: l should be odd"
+  | l' < 1 || even l' = -5 -- "N/A: l' should be positive and odd"
+  | l'' < 1 || even l'' = -6 -- "N/A: l'' should be positive and odd"
+  | l < 1 || even l = -7 -- "N/A: l should be positive and odd"
   | otherwise =
     choose (t - (j' + j'') - 1) ((l - 1) `div` 2) *
     choose (j' - 1) ((l' - 1) `div` 2) *
@@ -150,7 +150,7 @@ theorem6Dot4IV t (j', j'') (l', l'', l)
 
 theorem6Dot4V ::
      Integer -> (Integer, Integer) -> (Integer, Integer, Integer) -> Integer
--- Theorem 6.4(v): In the family (***) there are theorem6Dot4V t (j', j'') (l', l'', l) pairs (A,B)
+-- Theorem 6.4(v): In the family (*) there are theorem6Dot4V t (j', j'') (l', l'', l) pairs (A,B)
 -- of sets A and B such that {1,t} \cap A = {1}, and {1,t} \cap B = {t}.
 -- Call for instance (as in Example 6.5(v) of the monograph)
 --      ghci> theorem6Dot4V 5 (2, 2) (3, 3, 3)
@@ -165,9 +165,9 @@ theorem6Dot4V t (j', j'') (l', l'', l)
   | j' <= 0 || j' > t - 2 = -2 -- "N/A: j' should be between 1 (included) and (t-2) (included)"
   | j'' <= 0 || j'' > t - 2 = -3 -- "N/A: j'' should be between 1 (included) and (t-2) (included)"
   | j' + j'' >= t = -4 -- "N/A: (j' + j'') should be < t"
-  | even l' = -5 -- "N/A: l' should be odd"
-  | even l'' = -6 -- "N/A: l'' should be odd"
-  | even l = -7 -- "N/A: l should be odd"
+  | l' < 1 || even l' = -5 -- "N/A: l' should be positive and odd"
+  | l'' < 1 || even l'' = -6 -- "N/A: l'' should be positive and odd"
+  | l < 1 || even l = -7 -- "N/A: l should be positive and odd"
   | otherwise =
     choose (t - (j' + j'') - 1) ((l - 3) `div` 2) *
     choose (j' - 1) ((l' - 1) `div` 2) *
