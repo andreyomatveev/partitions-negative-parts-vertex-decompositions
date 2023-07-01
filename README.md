@@ -2,7 +2,7 @@
 
 A Haskell module exporting five functions that implement enumeration
 mechanisms described in Theorem 6.4 from the 
-monograph [A.O. Matveev, Symmetric Cycles](https://www.jennystanford.com/), 
+monograph [A.O. Matveev, Symmetric Cycles](https://www.routledge.com/Symmetric-Cycles/Matveev/p/book/9789814968812), 
 Jenny Stanford Publishing, 2023, and illustrated in Example 6.5.
 
 Let $t$ be an integer, $t\geq 3$. We denote by $[t]$ the *ground set* $\langle 1,2,\ldots, t\rangle$.
